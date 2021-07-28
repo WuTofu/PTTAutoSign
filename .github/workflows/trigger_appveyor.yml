@@ -15,7 +15,7 @@ jobs:
       - name: trigger appveyor to build
         env:
           GH_REPO: ${{ github.repository }}
-          TOKEN: ${{ secrets.appveyor }}
+          TOKEN: ${{ secrets.APPVEYOR }}
           # GITHUB_ACTOR
           # IFS=', ' read -r -a array <<< "$string"
         run: |
