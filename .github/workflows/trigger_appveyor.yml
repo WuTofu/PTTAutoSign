@@ -20,6 +20,8 @@ jobs:
           # IFS=', ' read -r -a array <<< "$string"
         run: |
           IFS='/' read -r -a array <<< "$GH_REPO" && \
+          echo "${array[0]}" && \
+          echo "${array[1]}" && \
           curl --request POST 'https://ci.appveyor.com/api/builds' \
           --header "Authorization: Bearer  ${TOKEN}" \
           --header 'Content-Type: application/json' \
