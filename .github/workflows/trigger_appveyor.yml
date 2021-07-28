@@ -21,11 +21,12 @@ jobs:
         run: |
           echo $GH_REPO && \
           IFS='/' read -r -a array <<< "$GH_REPO" && \
+          echo "$array" \
           curl --request POST 'https://ci.appveyor.com/api/builds' \
           --header "Authorization: Bearer  ${TOKEN}" \
           --header 'Content-Type: application/json' \
           --data-raw '{
-              "accountName": "${array[0]}",
-              "projectSlug": "${array[1]}",
+              "accountName": '"${array[0]}"',
+              "projectSlug": '"${array[1]}"',
               "branch": "main"
           }'
