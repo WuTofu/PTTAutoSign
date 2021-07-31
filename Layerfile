@@ -9,4 +9,4 @@ SECRET ENV ptt_id_1
 SECRET ENV bot_token
 SECRET ENV chat_id
 
-RUN poetry run python main.py
+RUN REPEATABLE poetry run python main.py
