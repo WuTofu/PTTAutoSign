@@ -1,0 +1,10 @@
+services:
+  PTTAutoSignIn:
+    image: ghcr.io/wutofu/pttautosign:latest
+    container_name: PTTAutoSignIn
+    environment:
+      bot_toke:: "YourTelegramBotToken"
+      chat_id: YourTelegramChatID
+      ptt_id_1: "username,passwd"
+      # Up to 6 ptt_id
+      #ptt_id_2: "username,passwd"
