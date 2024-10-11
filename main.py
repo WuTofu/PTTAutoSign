@@ -7,15 +7,20 @@ from typing import Union
 
 
 class Bot:
-    def __init__(self, token: str, chat_id: Union[str, int]):
+    def __init__(self, token: str, chat_id: Union[str, int], thread_id: Union[str, int]):
         self.token = token
         self.chat_id = chat_id
+        self.thread_id = thread_id
         self.api_url = f"https://api.telegram.org/bot{self.token}"
 
     def send_message(self, text: str):
+        payload = {"chat_id": self.chat_id, "text": text, "parse_mode": "html"}
+        if self.thread_id:
+            payload["message_thread_id"] = self.thread_id
+
         r = requests.post(
             self.api_url + "/sendMessage",
-            json={"chat_id": self.chat_id, "text": text, "parse_mode": "html"},
+            json=payload,
         )
 
 
@@ -25,6 +30,7 @@ tz = timezone(timedelta(hours=+8))
 # get env
 BOT_TOKEN = os.getenv("bot_token")
 CHAT_ID = os.getenv("chat_id")
+THREAD_ID = os.getenv("thread_id")
 
 if not os.getenv("ptt_id_1"):
     print("未輸入帳號資料")
@@ -37,7 +43,7 @@ for i in range(2, 6):
         ptt_account.append(pttid_)
 
 ptt = PTT.API(log_level=PTT.log.INFO)
-tg = Bot(BOT_TOKEN, CHAT_ID)
+tg = Bot(BOT_TOKEN, CHAT_ID, THREAD_ID)
 
 
 def daily_login(ptt_id: str, ptt_passwd: str):
