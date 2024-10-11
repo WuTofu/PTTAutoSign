@@ -16,7 +16,7 @@ class Bot:
     def send_message(self, text: str):
         payload = {"chat_id": self.chat_id, "text": text, "parse_mode": "html"}
         if not self.thread_id:
-            payload["message_thread_id"]: self.thread_id
+            payload["message_thread_id"] = self.thread_id
 
         r = requests.post(
             self.api_url + "/sendMessage",
