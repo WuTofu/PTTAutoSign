@@ -29,7 +29,7 @@ jobs:
         env:
           DSLIM_HTTP_PROBE: false
         with:
-          target: $IMAGE_NAME
+          target: ${{ env.IMAGE_NAME }}
           tag: "slim"
 
       - name: Log in to registry
