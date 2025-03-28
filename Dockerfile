@@ -1,4 +1,4 @@
-FROM 3.12.3-alpine as builder
+FROM python:3.12.3-alpine as builder
 
 RUN pip install poetry==2.1.1
 
@@ -15,7 +15,7 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
 
-FROM 3.12.3-alpine as runtime
+FROM python:3.12.3-alpine as runtime
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
